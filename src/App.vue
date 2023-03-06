@@ -10,17 +10,44 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
-      <nav>
+      <div id="nav" v-if="$store.state.user">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-      </nav>
+        <button @click="$store.dispatch('logout')"> Logout </button>
+      </div>
     </div>
   </header>
 
   <RouterView />
 </template>
 
+
+<script>
+import { onBeforeMount } from 'vue';
+import { useStore } from 'vuex'
+
+export default {
+  setup() {
+    const store = useStore()
+
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
+    })
+
+    return {
+      user: store.state.user
+    }
+  }
+}
+</script>
+
+
 <style scoped>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
