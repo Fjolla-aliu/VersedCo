@@ -73,8 +73,8 @@ import SupportIcon from './icons/IconSupport.vue'
     twitter account for latest news in the Vue world.
   </WelcomeItem>
 
-  <WelcomeItem>
-    <template #icon>
+  <WelcomeItem> 
+ <template #icon>
       <SupportIcon />
     </template>
     <template #heading>Support Vue</template>
@@ -83,4 +83,4 @@ import SupportIcon from './icons/IconSupport.vue'
     us by
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
   </WelcomeItem>
-</template>
+</template> 

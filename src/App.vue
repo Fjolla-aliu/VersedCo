@@ -56,13 +56,14 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
-}
+} 
 
 nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+  padding: 30px;
 }
 
 nav a.router-link-exact-active {
@@ -109,4 +110,6 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+
+
 </style>
