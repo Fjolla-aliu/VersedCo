@@ -6,17 +6,16 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
    <header> 
       <nav id="nav" v-if="$store.state.user">
-        <RouterLink to="/">Home</RouterLink>
+        <img src="./img/logo.png" alt="" class="logo">
+      
+        <RouterLink to="/home">Home</RouterLink>
+        <RouterLink to="/">Product</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <button @click="$store.dispatch('logout')"> Logout </button>
       </nav> 
   </header> 
-
   <RouterView />
 </template>
-
-
-
 
 <script>
 import { onBeforeMount } from 'vue';
@@ -42,43 +41,46 @@ export default {
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+ 
 }
 header {
-  line-height: 1.5;
-  max-height: 100px;
-  position: absolute;
+  width:100%;
   top: 0;
+  left: 0;
+  z-index: 9;
+  background: #ececec;
 }
 
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+ 
+  width: 250px;
+  height: 70px;
 } 
 
-nav {
+#nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 20px;
   text-align: center;
-  margin-top: 2rem;
-  padding: 30px;
+  padding: 10px 10vw;
+  
 }
 
 nav a.router-link-exact-active {
   color: var(--color-text);
 }
 
-nav a.router-link-exact-active:hover {
+#nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
 
-nav a {
+#nav a {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }
 
-nav a:first-of-type {
+#nav a:first-of-type {
   border: 0;
 }
 
