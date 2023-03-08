@@ -68,14 +68,21 @@ export default {
 
 <style>
     .forms{
+        
+        margin: 0;
+        padding: 0;
         display: flex;
-        min-height: 100vh;
+        width: 100%;
+         min-height: 100vh; 
+         min-width: 1000px;
+        
     }
 
-    form{
-        flex: 1 1 0%;
+     form{
+        width: 100%;
+        flex: 1 1 1%;
         padding: 8rem 1rem 1rem;
-    }
+    } 
 
     form.register{
         color: #FFF;
@@ -91,6 +98,7 @@ export default {
         font-size: 2rem;
         text-transform: uppercase;
         margin-bottom: 2rem;
+        
     }
 
     input{
@@ -120,6 +128,9 @@ input::placeholder {
 form.register input:not([type="submit"]) {
 	color: #FFF;
 	border-bottom: 2px solid #FFF;
+}
+.login {
+    width: 100%;
 }
 form.login input:not([type="submit"]) {
 	color: #2c3e50;

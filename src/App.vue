@@ -1,25 +1,21 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <div id="nav" v-if="$store.state.user">
+   <header> 
+      <nav id="nav" v-if="$store.state.user">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <button @click="$store.dispatch('logout')"> Logout </button>
-      </div>
-    </div>
-  </header>
+      </nav> 
+  </header> 
 
   <RouterView />
 </template>
+
+
 
 
 <script>
@@ -50,7 +46,9 @@ export default {
 }
 header {
   line-height: 1.5;
-  max-height: 100vh;
+  max-height: 100px;
+  position: absolute;
+  top: 0;
 }
 
 .logo {
@@ -102,14 +100,14 @@ nav a:first-of-type {
   }
 
   nav {
-    text-align: left;
+      text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
 
-    padding: 1rem 0;
-    margin-top: 1rem;
+    padding: 1rem 0; 
+    margin-top: 1rem; 
   }
 }
 
 
-</style>
+</style> 
