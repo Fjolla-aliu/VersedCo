@@ -78,6 +78,8 @@ nav a.router-link-exact-active {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
+  text-decoration: none;
+  color: black;
 }
 
 #nav a:first-of-type {
