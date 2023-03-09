@@ -1,17 +1,19 @@
-a {
-    text-decoration: none;
-    color: #1a1e21;
-  }
+
   
-  .section-title h2 {
+  h2 {
     text-shadow: 1px 1px 2px #4444;
   }
   /*****************************
       NavBar
   ******************************/
   header nav {
-    background: #fff;
+    background: white;
     box-shadow: 0px 0px 5px #4444;
+  }
+  nav a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
   }
   header nav a.navbar-brand h2 {
   
@@ -28,4 +30,10 @@ a {
     border: none!important;
     border-radius: none!important;
     
+  }
+  button{
+    background-color: rgb(227, 224, 224);
+    width: 80px;
+    height: 40px;
+    border-style: none;
   }

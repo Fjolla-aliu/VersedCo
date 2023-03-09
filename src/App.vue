@@ -5,14 +5,14 @@ import "./css/home.css"
 </script>
 
 <template>
+  
    <section id="topbar" class="mb-2 mb-lg-0 mb-sm-0 d-none d-lg-flex align-items-center pt-2 pb-2 bg-success text-white topbar-transparent">
         <div class="container">
           <div class="row">
             <div class="col-lg-6   text-start">
-             <span class="px-3"><i class="fa fa-phone "></i> +1 5589 55488 55 </span>
-          <i class="fa fa-clock"></i> Mon-Sat: 11:00 AM - 23:00 PM
+             <span class="px-3"><i class="fas fa-phone "></i> +1 5589 55488 55 </span>
+             <i class="fas fa-clock"></i> Mon-Sat: 11:00 AM - 23:00 PM
             </div>
-          
           </div>
         </div>
       </section>
@@ -42,7 +42,7 @@ import "./css/home.css"
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0 action-menu">
                         <li class="nav-item">
-                          <button @click="$store.dispatch('logout')"> Logout </button>
+                          <button  @click="$store.dispatch('logout')"> Logout </button>
                         </li>
                     </ul>
                     
