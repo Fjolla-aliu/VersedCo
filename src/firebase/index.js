@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore} from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,5 +16,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 
 const auth = getAuth(app)
+// eslint-disable-next-line no-unused-vars
+const db = getFirestore(app);
+
+const timestamp = app.firestore.FieldValue.sererTimestamp;
+
+export { timestamp }
+export default app.firestore;
 
 export { auth }
