@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { auth } from '../firebase'
@@ -24,18 +25,26 @@ const router = createRouter({
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       component: () => import('../views/Login.vue')
+
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('../views/Register.vue')
 
     }
   ]
 
 })
   router.beforeEach((to, from, next) => {
-    if (to.path === '/login' && auth.currentUser) {
-      next('/')
-      return;
-    }
+    // if (to.path === '/login' && auth.currentUser) {
+    //   next('/')
+    //   return;
+    // }
+    document.title = `${to.meta.title} | VersedCo`;
+    next();
 
     if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
       next('/login')

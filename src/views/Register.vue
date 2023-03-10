@@ -2,74 +2,96 @@
 <template>
     <div class="form-wrap">
 
-            <form  class="login">
-                 
-                 <p class="login-register"> Don't have an account?
-                    <RouterLink class="router-link" :to="{name: 'Register'}">Register</RouterLink>
-                 </p>
-                 <h2>Login</h2>
+        <form class="register" >
 
-                 <div class="inputs">
-                     <div class="input">
-                    <input type="email" placeholder="Email address" v-model="email" />
+            <p class="login-register"> Already have an account?
+                <RouterLink class="router-link" :to="{ name: 'Login' }">Login</RouterLink>
+            </p>
+            <h2>Create your account</h2>
+
+            <div class="inputs">
+                <div class="input">
+                <input type="text" placeholder="Username" v-model="username" />
+                </div>
+                 <div class="input">
+                    <input type="email" placeholder="Email" v-model="email" />
                     </div>
-                    <div class="input">
-                    <input type="password" placeholder="Password" v-model="password" />
-                    </div>
-                    <div  v-show="error" class="error">{{ this.errorMsg }}</div>
-                     </div>
+                <div class="input">
+                <input type="password" placeholder="Password" v-model="password" />
+                </div>
+                <div  v-show="error" class="error">{{ this.errorMsg }}</div>
+            </div>
 
-                     <button @click.prevent="signIn">Sign in</button>
+            <button @click.prevent="register">Sign up</button>
 
-                    <div class="angle"></div>
-            </form>
+            <div class="angle"></div>
+        </form>
 
-                    <div class="background"></div>
+        <div class="background"></div>
     </div>
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import firebase, { auth } from '../firebase';
-
-// import { ref } from 'vue'
-// import { useStore } from 'vuex'
+import db from "../firebase/index";
 
 export default {
 
     // eslint-disable-next-line vue/multi-word-component-names
-    name: "Login",
+    name: "Register",
     components: {
-      
+        
     },
 
     data() {
         return {
+            username: "",
             email: "",
             password: "",
             error: null,
             errorMsg: "",
+
         };
     },
     methods: {
-        signIn() {
-            firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => { 
-                this.$router.push({ name: "Home" });
+        async register() {
+            if (
+                this.email !== null &&
+                this.password !== null &&
+                this.username !== null
+            ) {
                 this.error = false;
                 this.errorMsg = "";
-                console.log(firebase.auth().currentUser.uid);
-            })
-            .catch((err) => {
-                this.error = true;
-                this.errorMsg = err.message;
+                return;
+            }
+            this.error = true;
+            this.errorMsg = "Please fill out all the fields!";
+            const firebaseAuth = await firebase.auth();
+            const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password);
+            const result = await createUser;
+            const dataBase = db.collection("users").doc(result.user.uid);
+
+            await dataBase.set({
+                username: this.username,
+                email: this.email,
+                
             });
-        }
-    }
+            this.$router.push({name: "Home"})
+            return;
+        },
+   }
 };
 
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+    .register{
+        h2{
+            max-width: 350px;
+        }
+    }
+    
     .form-wrap{
         overflow: hidden;
         margin: 0 auto;

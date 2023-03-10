@@ -1,4 +1,5 @@
 <script setup>
+//import { watch } from 'fs';
 import { RouterLink, RouterView } from 'vue-router'
 import "./css/home.css"
 // import HelloWorld from './components/HelloWorld.vue'
@@ -27,7 +28,7 @@ import "./css/home.css"
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link active " aria-current="page" href="#"> <RouterLink to="/home">Home</RouterLink></a>
+                          <a class="nav-link active " aria-current="page" href="#"> <RouterLink :to="{name: 'Home'}">Home</RouterLink></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><RouterLink to="/">Product</RouterLink></a>
@@ -64,22 +65,43 @@ import "./css/home.css"
 </template>
 
 <script>
-import { onBeforeMount } from 'vue';
-import { useStore } from 'vuex'
-
+import firebase from "firebase/auth";
+import "firebase/auth";
 export default {
-  setup() {
-    const store = useStore()
+  name: "app",
 
-    onBeforeMount(() => {
-      store.dispatch('fetchUser')
-    })
-
+  data() {
     return {
-      user: store.state.user
-    }
-  }
-}
+      nav: null,
+    };
+  },
+  created() {
+    this.checkRoute();
+    setTimeout(() => {
+      console.log(firebase.auth().currentUser.uid);
+    }, 2000);
+    console.log(firebase.auth().currentUser);
+  },
+  mounted() { },
+    methods: {
+      checkRoute() {
+        if (
+          this.$route.name === "Login" ||
+          this.$route.name === "Register") {
+          this.nav = true;
+          return;
+        }
+        this.nav = false;
+
+      },
+    },
+    watch: {
+      $route() {
+        this.checkRoute();
+      },
+    },
+  
+};
 </script>
 
 
@@ -158,6 +180,11 @@ nav a.router-link-exact-active {
     padding: 1rem 0; 
     margin-top: 1rem; 
   }
+}
+.error{
+  text-align: center;
+  font-size: 12px;
+  color: red;
 }
 
 
