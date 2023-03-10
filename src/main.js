@@ -6,11 +6,13 @@ import store from './store'
 import './assets/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
-import firebase from "firebase/auth";
-import "firebase/auth";
+import { auth } from '@/firebase'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+
 
 let app;
-firebase.auth().onAuthStateChanged(() => {
+auth.onAuthStateChanged(() => {
     
 })
 

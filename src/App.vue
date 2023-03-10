@@ -2,7 +2,7 @@
 //import { watch } from 'fs';
 import { RouterLink, RouterView } from 'vue-router'
 import "./css/home.css"
-// import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
@@ -28,7 +28,7 @@ import "./css/home.css"
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link active " aria-current="page" href="#"> <RouterLink :to="{name: 'Home'}">Home</RouterLink></a>
+                          <a class="nav-link active " aria-current="page" href="#"> <RouterLink to="/home">Home</RouterLink></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><RouterLink to="/">Product</RouterLink></a>
@@ -40,47 +40,70 @@ import "./css/home.css"
                         <li class="nav-item">
                             <a class="nav-link" href="#"><RouterLink to="/">Contact</RouterLink></a>
                         </li>
+                        <li class="nav-item">
+                              <a class="nav-link" href="#"><RouterLink :to="{ name: 'Login' }">Login/Register</RouterLink></a>
+                          </li>
                     </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0 action-menu">
+                    <!-- <ul class="navbar-nav mb-2 mb-lg-0 action-menu">
                         <li class="nav-item">
                           <button  @click="$store.dispatch('logout')"> Logout </button>
                         </li>
-                    </ul>
+                    </ul> -->
                     
+                     <div class="profile" ref="profile">
+                      <div class="profile-menu">
+                        <div class="right">
+                          <p>{{ this.$store.state.profileUsername }} </p>
+                          <p>{{ this.$store.state.profileEmail }}</p>
+                        </div>
+
+                        <div class="options">
+                          <div class="option">
+                            <RouterLink class="option" to="#">
+                              <p>Profile</p>
+                            </RouterLink>
+                          </div>
+                           <div class="option">
+                              <RouterLink class="option" to="#">
+                                <p>Admin</p>
+                              </RouterLink>
+                            </div>
+                             <div class="option">
+                              <RouterLink class="option" to="#">
+                                <p>SignOut</p>
+                              </RouterLink>
+                            </div>
+                        </div>
+                      </div>
+                     </div>
                 </div>
             </div>
         </nav>
  
-   <!-- <header> 
-      <nav id="nav" v-if="$store.state.user">
-        
-        <RouterLink to="/home">Home</RouterLink>
-        <RouterLink to="/">Product</RouterLink>
-        <img src="./img/logo.png" alt="" class="logo">
-        <RouterLink to="/about">About</RouterLink>
-        <button @click="$store.dispatch('logout')"> Logout </button>
-      </nav> 
-  </header>  -->
   <RouterView />
 </template>
 
 <script>
-import firebase from "firebase/auth";
-import "firebase/auth";
+import { auth } from '@/firebase'
+
 export default {
   name: "app",
 
   data() {
     return {
-      nav: null,
+      user: null,
     };
   },
-  created() {
+   created() {
+    auth.onAuthStateChanged((user) => {
+      this.$store.commit("updateUser", user);
+      if (user) {
+        this.$store.dispatch("getCurrentUser");
+        console.log(this.$store.state.profileEmail);
+        console.log(user.uid);
+      }
+    })
     this.checkRoute();
-    setTimeout(() => {
-      console.log(firebase.auth().currentUser.uid);
-    }, 2000);
-    console.log(firebase.auth().currentUser);
   },
   mounted() { },
     methods: {
@@ -88,10 +111,9 @@ export default {
         if (
           this.$route.name === "Login" ||
           this.$route.name === "Register") {
-          this.nav = true;
           return;
         }
-        this.nav = false;
+
 
       },
     },
