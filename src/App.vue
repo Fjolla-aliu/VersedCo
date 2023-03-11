@@ -7,7 +7,7 @@ import "./css/home.css"
 
 <template>
   
-   <section id="topbar" class="mb-2 mb-lg-0 mb-sm-0 d-none d-lg-flex align-items-center pt-2 pb-2 bg-success text-white topbar-transparent">
+   <section id="topbar" class="mb-2 mb-lg-0 mb-sm-0 d-none d-lg-flex align-items-center pt-2 pb-2 text-white topbar-transparent">
         <div class="container">
           <div class="row">
             <div class="col-lg-6   text-start">
@@ -17,9 +17,9 @@ import "./css/home.css"
           </div>
         </div>
       </section>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light"  v-if="$store.state.user">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light " id="nav">
             <div class="container">
-                    <h2 class="fw-bold  mb-2 mb-lg-0 mb-sm-0">VersedCo</h2>
+                    <h1 class="fw-bold  mb-2 mb-lg-0 mb-sm-0">VersedCo</h1>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +40,6 @@ import "./css/home.css"
                         <li class="nav-item">
                             <a class="nav-link" href="#"><RouterLink to="/">Contact</RouterLink></a>
                         </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="#"><RouterLink :to="{ name: 'Login' }">Login/Register</RouterLink></a>
-                          </li>
                     </ul>
                     <!-- <ul class="navbar-nav mb-2 mb-lg-0 action-menu">
                         <li class="nav-item">
@@ -57,24 +54,20 @@ import "./css/home.css"
                           <p>{{ this.$store.state.profileEmail }}</p>
                         </div>
 
-                        <div class="options">
-                          <div class="option">
-                            <RouterLink class="option" to="#">
-                              <p>Profile</p>
-                            </RouterLink>
-                          </div>
-                           <div class="option">
-                              <RouterLink class="option" to="#">
-                                <p>Admin</p>
-                              </RouterLink>
-                            </div>
-                             <div class="option">
-                              <RouterLink class="option" to="#">
-                                <p>SignOut</p>
-                              </RouterLink>
-                            </div>
+                        <div class="ps">
+                          <button  class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                           User
+                           </button>
+                           <ul class="dropdown-menu dropdown-menu-lg-end">
+                                  <li class="nav-item">
+                                  <a class="nav-link" href="#"><RouterLink :to="{ name: 'Login' }">Login/Register</RouterLink></a>
+                                  </li>
+                                  <li><button class="dropdown-item" type="button">Profile</button></li>
+                                  <li><button class="dropdown-item" type="button">Admin </button></li>
+                                  <li><button class="dropdown-item" type="button">SignOut </button></li>
+                              </ul>
                         </div>
-                      </div>
+                       </div>
                      </div>
                 </div>
             </div>
@@ -131,7 +124,11 @@ export default {
 *{
   margin: 0;
   padding: 0;
+ font-family: monospace;
  
+}
+#topbar{
+  background: #a4d1b4;
 }
 header {
   width:100%;
@@ -141,19 +138,16 @@ header {
   background: #ececec;
   height: 120px;
 }
-
-.logo {
-  display: block;
- 
-  width: 250px;
-  height: 50px;
-} 
+#dropdownMenu2{
+  background: #f9fafa;
+}
 
 #nav {
   width: 100%;
   font-size: 20px;
   text-align: center;
   padding: 10px 10vw;
+  height: 50px;
   
 }
 
