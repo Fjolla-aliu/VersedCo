@@ -24,6 +24,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/ContactView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/cart',
       name: 'cart',
       component: () => import('../views/CartView.vue'),
