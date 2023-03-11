@@ -3,7 +3,7 @@
 
     <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="img-fluid w-100 h-50 overflow-hidden" src="./cover3.png" alt="...">
+                <img class="img-fluid w-100 h-50 overflow-hidden" src="./img/cover3.png" alt="...">
             </div>
     </div>
     <section id="about" class="about mt-5">
