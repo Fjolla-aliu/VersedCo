@@ -22,7 +22,7 @@
                 <div  v-show="error" class="error">{{ this.errorMsg }}</div>
             </div>
 
-            <button @click.prevent="register">Sign up</button>
+            <button type="submit">Sign up</button>
 
             <div class="angle"></div>
         </form>
@@ -205,7 +205,7 @@ export default {
         background-color: #fff;
         transform: rotateZ(3deg);
         width: 60px;
-        right: -30px;
+        right: -31px;
         height: 101%;
         @media (min-width: 900px){
             display: initial;
