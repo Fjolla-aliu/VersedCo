@@ -2,7 +2,7 @@
 <template>
     <div class="form-wrap">
 
-            <form  class="login">
+             <form action="#" class="login"  @submit.prevent="Login">
                  
                  <p class="login-register"> Don't have an account?
                     <RouterLink class="router-link" :to="{name: 'Register'}">Register</RouterLink>
@@ -19,7 +19,7 @@
                     <div  v-show="error" class="error">{{ this.errorMsg }}</div>
                      </div>
 
-                     <button @click.prevent="signIn">Sign in</button>
+                     <button type="submit">Sign in</button>
 
                     <div class="angle"></div>
             </form>
@@ -29,30 +29,50 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 
+
+// eslint-disable-next-line no-unused-vars
 import { auth } from '@/firebase'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 
 export default {
 
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Login",
+    setup() {
+        const email = ref('')
+        const password = ref('')
+        const error = ref(null)
+
+        const store = useStore()
+        const router = useRouter()
+
+        const Login = async () => {
+            try {
+                await store.dispatch('logIn', {
+                    email: email.value,
+                    password: password.value
+                })
+                router.push('/home')
+            }
+            catch (err) {
+                error.value = err.message
+            }
+        }
+        return { Login, email, password, error }
+    },
     components: {
       
     },
-
-    data() {
-        return {
-            email: "",
-            password: "",
-            error: null,
-            errorMsg: "",
-        };
-    },
     methods: {
-        signIn() {
-            //     auth.signInWithEmailAndPassword(this.email, this.password).then(() => { 
+       
+       
+    }
+};
+  //     auth.signInWithEmailAndPassword(this.email, this.password).then(() => {
             //         this.$router.push({ name: "Home" });
             //         this.error = false;
             //         this.errorMsg = "";
@@ -63,22 +83,6 @@ export default {
             //         this.errorMsg = err.message;
             //     });
             // }
-            auth.onAuthStateChanged(() => {
-                auth.signInWithEmailAndPassword(this.email, this.password)
-                    .then(() => {
-                        this.$router.push({ name: 'Home' })
-                        this.error = false
-                        this.errorMsg = ''
-                    })
-                    .catch((err) => {
-                        this.error = true
-                        this.errorMsg = err.message
-                    });
-            });
-        }
-    }
-};
-
 </script>
 
 <style lang="scss">

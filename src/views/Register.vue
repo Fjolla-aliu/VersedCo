@@ -30,7 +30,7 @@
         <div class="background"></div>
     </div>
 </template>
-
+<!-- 
 <script>
 // eslint-disable-next-line no-unused-vars
 import firebase, { auth } from '../firebase';
@@ -83,6 +83,42 @@ export default {
    }
 };
 
+</script> -->
+
+<script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+export default {
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: "Register",
+    setup() {
+        const name = ref('')
+        const email = ref('')
+        const password = ref('')
+        const error = ref(null)
+
+        const store = useStore()
+        const router = useRouter()
+
+        const Register = async () => {
+            try {
+                await store.dispatch('Register', {
+                    email: email.value,
+                    password: password.value,
+                    name: name.value
+                })
+                router.push('/home')
+            }
+            catch (err) {
+                error.value = err.message
+            }
+        }
+
+        return { Register, name, email, password, error }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
