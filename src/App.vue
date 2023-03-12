@@ -60,10 +60,10 @@ import "./css/home.css"
                            User
                            </button>
                            <ul class="dropdown-menu dropdown-menu-lg-end">
-                                  <li class="nav-item">
-                                  <a class="nav-link" href="#"><RouterLink :to="{ name: 'Login' }">Login/Register</RouterLink></a>
+                                  <li><button class="dropdown-item" type="button">
+                                  <a class="nav-link" href="#"><RouterLink :to="{ name: 'Login' }">Login/Register</RouterLink></a></button>
                                   </li>
-                                  <li><button class="dropdown-item" type="button">Profile</button></li>
+                                  <li><button class="dropdown-item" type="button"> <a class="nav-link" href="#"><RouterLink to="/cart">My Cart</RouterLink></a></button></li>
                                   <li><button class="dropdown-item" type="button">Admin </button></li>
                                   <li><button class="dropdown-item" type="button">SignOut </button></li>
                               </ul>
