@@ -2,7 +2,7 @@
 <template>
     <div class="form-wrap">
 
-        <form class="register" >
+        <form class="register" action="#"  @submit.prevent="Register" >
 
             <p class="login-register"> Already have an account?
                 <RouterLink class="router-link" :to="{ name: 'Login' }">Login</RouterLink>
@@ -30,60 +30,7 @@
         <div class="background"></div>
     </div>
 </template>
-<!-- 
-<script>
-// eslint-disable-next-line no-unused-vars
-import firebase, { auth } from '../firebase';
-import db from "../firebase/index";
 
-export default {
-
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: "Register",
-    components: {
-        
-    },
-
-    data() {
-        return {
-            username: "",
-            email: "",
-            password: "",
-            error: null,
-            errorMsg: "",
-
-        };
-    },
-    methods: {
-        async register() {
-            if (
-                this.email !== null &&
-                this.password !== null &&
-                this.username !== null
-            ) {
-                this.error = false;
-                this.errorMsg = "";
-                return;
-            }
-            this.error = true;
-            this.errorMsg = "Please fill out all the fields!";
-            const firebaseAuth = await firebase.auth();
-            const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password);
-            const result = await createUser;
-            const dataBase = db.collection("users").doc(result.user.uid);
-
-            await dataBase.set({
-                username: this.username,
-                email: this.email,
-                
-            });
-            this.$router.push({name: "Home"})
-            return;
-        },
-   }
-};
-
-</script> -->
 
 <script>
 import { ref } from 'vue'
@@ -104,7 +51,7 @@ export default {
 
         const Register = async () => {
             try {
-                await store.dispatch('Register', {
+                await store.dispatch('register', {
                     email: email.value,
                     password: password.value,
                     name: name.value
@@ -112,7 +59,7 @@ export default {
                 router.push('/home')
             }
             catch (err) {
-                error.value = err.message
+                console.log(err.message);
             }
         }
 

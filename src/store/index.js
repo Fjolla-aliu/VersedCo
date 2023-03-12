@@ -2,24 +2,27 @@
 /* eslint-disable no-undef */
 import { createStore } from 'vuex'
 // import router from '../router'
-import { auth } from '../firebase'
+import { auth , db } from '../firebase'
 import { ref } from 'vue'
- import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+
 
 
 
 export default createStore({
     state: {
-        user: null,
-        profileEmail: null,
-        profileId: null,
-        profileUsername: null,
-         loggedIn: false,
-    data: null
+        user: {
+            profileEmail: null,
+            profileId: null,
+            profileUsername: null,
+            loggedIn: false,
+            data: null
+        },
+        data : {}
     },
     getters: {
     user(state){
-      return state.user
+      return state.data
     }
   },
     
@@ -38,7 +41,7 @@ export default createStore({
     state.user.loggedIn = value;
   },
   SET_USER(state, data) {
-    state.user.data = data;
+    state.data = data;
   }
        
         },
@@ -53,7 +56,6 @@ export default createStore({
           const response = await createUserWithEmailAndPassword(auth, email, password)
           if (response) {
               context.commit('SET_USER', response.user)
-              response.user.updateProfile({displayName: name})
           } else {
               throw new Error('Unable to register user')
           }

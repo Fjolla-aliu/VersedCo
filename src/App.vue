@@ -3,7 +3,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import "./css/home.css"
 
-
 </script>
 
 <template>
@@ -11,6 +10,7 @@ import "./css/home.css"
    <section id="topbar" class="mb-2 mb-lg-0 mb-sm-0 d-none d-lg-flex align-items-center pt-2 pb-2 text-white topbar-transparent">
         <div class="container">
           <div class="row">
+
             <div class="col-lg-6   text-start">
              <span class="px-3"><i class="fas fa-phone "></i> +1 5589 55488 55 </span>
              <i class="fas fa-clock"></i> Mon-Sat: 11:00 AM - 23:00 PM
@@ -39,7 +39,7 @@ import "./css/home.css"
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><RouterLink to="/contact">Contact</RouterLink></a>
+                            <a class="nav-link" href="#"><RouterLink to="/">Contact</RouterLink></a>
                         </li>
                     </ul>
                     <!-- <ul class="navbar-nav mb-2 mb-lg-0 action-menu">
@@ -52,7 +52,7 @@ import "./css/home.css"
                       <div class="profile-menu">
                         <div class="right">
                           <p>{{ this.$store.state.profileUsername }} </p>
-                          <p>{{ this.$store.state.profileEmail }}</p>
+                       
                         </div>
 
                         <div class="ps">
@@ -78,42 +78,29 @@ import "./css/home.css"
 </template>
 
 <script>
-import { auth } from '@/firebase'
 
 export default {
+  
   name: "app",
+
 
   data() {
     return {
-      user: null,
+      user: null
+      
     };
   },
-   created() {
-    auth.onAuthStateChanged((user) => {
-      this.$store.commit("updateUser", user);
-      if (user) {
-        this.$store.dispatch("getCurrentUser");
-        console.log(this.$store.state.profileEmail);
-        console.log(user.uid);
-      }
-    })
-    this.checkRoute();
-  },
+ 
   mounted() { },
     methods: {
-      checkRoute() {
-        if (
-          this.$route.name === "Login" ||
-          this.$route.name === "Register") {
-          return;
-        }
-
-
-      },
+    
     },
-    watch: {
-      $route() {
-        this.checkRoute();
+  watch: {
+    
+      
+    $route() {
+      console.log(this.$store.state.data);
+     
       },
     },
   
