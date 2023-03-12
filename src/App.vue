@@ -32,7 +32,7 @@ import "./css/home.css"
                           <a class="nav-link active " aria-current="page" href="#"> <RouterLink to="/home">Home</RouterLink></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><RouterLink to="/">Product</RouterLink></a>
+                            <a class="nav-link" href="#"><RouterLink to="/shop">Shop</RouterLink></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><RouterLink to="/about">About</RouterLink></a>
@@ -64,6 +64,7 @@ import "./css/home.css"
                                   <a class="nav-link" href="#"><RouterLink :to="{ name: 'Login' }">Login/Register</RouterLink></a></button>
                                   </li>
                                   <li><button class="dropdown-item" type="button"> <a class="nav-link" href="#"><RouterLink to="/cart">My Cart</RouterLink></a></button></li>
+                                  <li><button class="dropdown-item" type="button">Orders </button></li>
                                   <li><button class="dropdown-item" type="button">Admin </button></li>
                                   <li><button class="dropdown-item" type="button">SignOut </button></li>
                               </ul>
