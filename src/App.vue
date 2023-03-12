@@ -39,7 +39,7 @@ import "./css/home.css"
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><RouterLink to="/">Contact</RouterLink></a>
+                            <a class="nav-link" href="#"><RouterLink to="/contact">Contact</RouterLink></a>
                         </li>
                     </ul>
                     <!-- <ul class="navbar-nav mb-2 mb-lg-0 action-menu">
