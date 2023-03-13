@@ -10,17 +10,18 @@
                     <div class="col-md-3">
                         <div class="card box">
                             
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                <a href="/product"><img src="./img/top1.png" class="img-fluid" /></a>
+                            <div v-for="product in shop" class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" v-bind:key="product.id">
+                                <a href="/product"><img v-bind:src="product.imageUrl" class="img-fluid" /></a>
                                 <a href="#!">
                                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                 </a>
                             </div>
                             <div class="card-body">
                                 
-                              <p class="card-text text-secondary">TOTAL TRANSFORMATION <span class="price1">$45</span></p>
+                              <p class="card-text text-secondary">TOTAL TRANSFORMATION <span class="price1">${{product.price}}</span></p>
                                 <h6 class="card-title">EXFOLIATE + RENEW BODY DUO</h6>
-                                <button  class="btn-shop">Add</button>
+                                <RouterLink v-bind:to="'/products' + product.id">
+                                <button  class="btn-shop">Add</button></RouterLink>
                             </div>
                         </div>
                     </div>
