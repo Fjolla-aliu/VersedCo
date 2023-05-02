@@ -13,6 +13,11 @@ app.post('/hello', (req, res) => {
     res.send(`Hello ${req.body.name}`);
 });
 
+app.use(cors());
+app.use("/products",products);
+app.use("/orders",orders);
+app.use("/categories",categories);
+
 mongoose.connect(uri)
     .then( () => {
         console.log('Connected to the database ')
