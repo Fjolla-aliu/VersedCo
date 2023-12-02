@@ -163,3 +163,40 @@
 </template>
 
 
+<script>
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            showFullText: false,
+            aboutText: '', // Store the about section content here
+        };
+    },
+    computed: {
+        limitedText() {
+            // Show a limited portion of the text when "Read More" is not clicked
+            const maxLength = 400; // Adjust the maximum length as needed
+            return this.aboutText.slice(0, maxLength);
+        },
+    },
+    methods: {
+        fetchAboutText() {
+            // Fetch the about section content from backend API
+            axios.get('/api/about')
+                .then((response) => {
+                    this.aboutText = response.data.aboutText;
+                })
+                .catch((error) => {
+                    console.error('Error fetching about text:', error);
+                });
+        },
+    },
+    created() {
+        // Fetch the about section content when the component is created
+        this.fetchAboutText();
+    },
+};
+</script>
+
+

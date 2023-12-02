@@ -18,13 +18,15 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Quantity</span>
                         </div>
-                        <input type="number" id="form" class="form-control"  />
+                        <input type="number" v-model="quantity" class="form-control" />
+
                       </div>
 
                       <div class="input-group col-md-3 col-4 p-0">
-                        <button class="btn" id="add-to-cart-button">
-                          Add to Cart
+                        <button class="btn" id="add-to-cart-button" @click="addToCart">
+                         Add to Cart
                         </button>
+
                       </div>
                     </div>
                     <div class="features pt-3">
@@ -40,6 +42,40 @@
         </div>
     </main>
 </template>
+
+
+<script>
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            quantity: 1, // Default quantity
+        };
+    },
+    methods: {
+        addToCart() {
+            // Implement your cart logic here
+            const product = {
+                name: "EXFOLIATE + RENEW BODY DUO",
+                price: 45,
+                quantity: this.quantity,
+            };
+            axios.post('/api/add-to-cart', product)
+                .then(response => {
+                    // Handle the response from the backend
+                    console.log(response.data);
+                    // You can update your frontend UI based on the response if needed
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error(error);
+                });
+        },
+    },
+};
+</script>
+
 
 <style scoped>
     #form{

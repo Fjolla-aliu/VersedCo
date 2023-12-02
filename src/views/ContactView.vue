@@ -64,17 +64,17 @@
       </div>
   </section>
     </main>
-         <!-- Footer -->
+        
          <footer class="text-center text-lg-start bg-dark py-3 text-white">
           
           <!-- Section: Social media -->
 
-          <!-- Section: Links  -->
+          
           <section class="">
               <div class="container text-center text-md-start mt-5">
-                  <!-- Grid row -->
+               
                   <div class="row mt-3">
-                      <!-- Grid column -->
+                      
                       <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                           <!-- Content -->
                           <h2 class="text-uppercase fw-bold mb-4">
@@ -85,11 +85,9 @@
                               dolor sit amet, consectetur adipisicing elit.
                           </p>
                       </div>
-                      <!-- Grid column -->
-
-                      <!-- Grid column -->
+                     
                       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                          <!-- Links -->
+                          
                           <h6 class="text-uppercase fw-bold mb-4">
                               Products
                           </h6>
@@ -103,11 +101,9 @@
                               <a href="#!" class="text-reset">By Ingredient</a>
                           </p>
                       </div>
-                      <!-- Grid column -->
-
-                      <!-- Grid column -->
+                      
                       <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                          <!-- Links -->
+                         
                           <h6 class="text-uppercase fw-bold mb-4">
                               Useful links
                           </h6>
@@ -124,11 +120,9 @@
                               <a href="#!" class="text-reset">Help</a>
                           </p>
                       </div>
-                      <!-- Grid column -->
-
-                      <!-- Grid column -->
+                      
                       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                          <!-- Links -->
+                          
                           <h6 class="text-uppercase fw-bold mb-4">
                               Contact
                           </h6>
@@ -140,18 +134,81 @@
                           <p><i class="bi bi-phone me-3"></i> + 01 234 567 88</p>
                           <p><i class="bi bi-print me-3"></i> + 01 234 567 89</p>
                       </div>
-                      <!-- Grid column -->
+                     
                   </div>
-                  <!-- Grid row -->
+                  
               </div>
           </section>
           <!-- Section: Links  -->
 
-          <!-- Copyright -->
+         
           <div class="text-center py-4" style="background-color: rgba(0, 0, 0, 0.05);">
-              © 2021 Copyright:
+              © 2023 Copyright:
               <a class="text-reset fw-bold" href="/">VersedCo.com</a>
           </div>
-          <!-- Copyright -->
+          
       </footer>
   </template>
+
+
+<script>
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            formData: {
+                name: '',
+                email: '',
+                subject: '',
+                message: '',
+            },
+            errors: {},
+            submissionStatus: '',
+        };
+    },
+    methods: {
+        submitForm() {
+            // Clear previous errors and submission status
+            this.errors = {};
+            this.submissionStatus = '';
+
+            
+            if (!this.formData.name || !this.formData.email || !this.formData.subject || !this.formData.message) {
+                this.errors = {
+                    name: !this.formData.name ? 'Name is required' : '',
+                    email: !this.formData.email ? 'Email is required' : '',
+                    subject: !this.formData.subject ? 'Subject is required' : '',
+                    message: !this.formData.message ? 'Message is required' : '',
+                };
+                return;
+            }
+
+            // If the form data is valid, send a POST request to backend
+            axios
+                .post('/api/contact', this.formData)
+                .then(() => {
+                    
+                    this.submissionStatus = 'Message sent successfully!';
+                    // Optionally, you can reset the form here
+                    this.formData = {
+                        name: '',
+                        email: '',
+                        subject: '',
+                        message: '',
+                    };
+                })
+                .catch((error) => {
+                    // Handle errors from the server
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        
+                        this.errors = error.response.data.errors;
+                    } else {
+                        
+                        this.submissionStatus = 'An error occurred while sending the message. Please try again later.';
+                    }
+                });
+        },
+    },
+};
+</script>

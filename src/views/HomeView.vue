@@ -204,6 +204,64 @@
           <!-- Copyright -->
       </footer>
 </template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            products: [
+                {
+                    id: 1,
+                    title: 'EXFOLIATE + RENEW BODY DUO',
+                    description: 'TOTAL TRANSFORMATION',
+                    price: '$45',
+                    image: '@/assets/top1.png',
+                },
+                {
+                    id: 2,
+                    title: 'LUMINIZING GLOW DROPS',
+                    description: 'MOOD LIGHTING',
+                    price: '$30',
+                    image: '@/assets/top2.png',
+                },
+                {
+                    id: 3,
+                    title: 'GENTLE RETINOL TRIO',
+                    description: 'SMOOTH OPERATORS',
+                    price: '$25',
+                    image: '@/assets/top3.png',
+                },
+                {
+                    id: 4,
+                    title: 'INSTANT RESURFACING MASK',
+                    description: "DOCTOR'S VISIT",
+                    price: '$30',
+                    image: '@/assets/top4.png',
+                },
+            ],
+            cart: [],
+        };
+    },
+    methods: {
+        addToCart(product) {
+            
+            const existingProduct = this.cart.find(item => item.id === product.id);
+
+            if (existingProduct) {
+                
+                existingProduct.quantity++;
+            } else {
+                
+                this.cart.push({ ...product, quantity: 1 });
+            }
+        },
+    },
+};
+</script>
+
+
+
 <style>
 @media (min-width: 1024px) {
   .home {
